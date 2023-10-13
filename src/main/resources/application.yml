@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:~/abelaid-url-shortener-db;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE
+  liquibase:
+    change-log: classpath:/db/changelog/master.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+shortener:
+  random-max-retry: 10
+  token-max-length: 10

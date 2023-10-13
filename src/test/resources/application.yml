@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:url-shortener-test
+  liquibase:
+    change-log: classpath:/db/changelog/master.xml
+
+shortener:
+  random-max-retry: 1
+  token-max-length: 10
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.transaction.interceptor: TRACE
