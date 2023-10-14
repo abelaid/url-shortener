@@ -25,6 +25,7 @@ import java.util.List;
 class ShortenerResource {
 
     private final ShortenerService shortenerService;
+    private final TrackingService trackingService;
 
     @GetMapping(params = "url", value = {"/", "/api/shorten"})
     ShortenerResponse shortenUrl(@Valid @NotNull @URL java.net.URL url) throws Exception {
@@ -47,7 +48,10 @@ class ShortenerResource {
     @GetMapping("/{shortened}")
     void redirectToCompleteUrl(@PathVariable String shortened, HttpServletResponse response)
             throws ShortenedUrlNotFoundException, IOException {
-        response.sendRedirect(shortenerService.getCompleteUrl(shortened));
+        String completeUrl = shortenerService.getCompleteUrl(shortened);
+        response.sendRedirect(completeUrl);
+        trackingService.asyncClickCount(shortened, completeUrl);
+
     }
 
     @DeleteMapping("/api/shortened-urls/{shortened}")

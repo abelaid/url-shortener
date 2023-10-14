@@ -31,7 +31,7 @@ class ShortenerResourceIntTest {
 
     @Test
     void shouldRedirectToCompleteUrl() throws Exception {
-        shortenedUrlRepository.save(new ShortenedUrlEntity("toto", "http://junit.com"));
+        shortenedUrlRepository.save(ShortenedUrlEntity.builder().token("toto").completeUrl("http://junit.com").build());
 
         mvc.perform(get("/toto"))
                 .andExpect(status().is3xxRedirection())
@@ -50,7 +50,7 @@ class ShortenerResourceIntTest {
 
     @Test
     void shouldGetToCompleteUrl() throws Exception {
-        shortenedUrlRepository.save(new ShortenedUrlEntity("toto", "http://junit.com"));
+        shortenedUrlRepository.save(ShortenedUrlEntity.builder().token("toto").completeUrl("http://junit.com").build());
 
         mvc.perform(get("/").param("shortened", "toto"))
                 .andExpect(status().isOk())

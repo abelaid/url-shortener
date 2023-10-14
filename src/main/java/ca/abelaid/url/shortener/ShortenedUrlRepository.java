@@ -15,4 +15,7 @@ interface ShortenedUrlRepository extends JpaRepository<ShortenedUrlEntity, Strin
     @Query(value = "insert into ShortenedUrlEntity s (token, completeUrl) values (:token, :completeUrl)")
     void persist(@Param("token") String token, @Param("completeUrl") String completeUrl);
 
+    @Modifying
+    @Query(value = "update ShortenedUrlEntity s set s.clickCount = s.clickCount + 1 where s.token = :token")
+    void updateClickCount(@Param("token") String token);
 }

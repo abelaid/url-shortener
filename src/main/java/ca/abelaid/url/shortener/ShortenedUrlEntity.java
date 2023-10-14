@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,11 +14,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 class ShortenedUrlEntity {
     @Id
     private String token;
 
     @Column(nullable = false, updatable = false)
     private String completeUrl;
+
+    @Column(nullable = false)
+    private Integer clickCount;
 
 }

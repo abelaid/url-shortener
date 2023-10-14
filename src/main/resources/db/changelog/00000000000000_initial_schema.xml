@@ -8,6 +8,8 @@
             <column name="complete_url" type="varchar">
                 <constraints nullable="false" />
             </column>
+            <column name="click_count" type="integer" defaultValue="0">
+            </column>
         </createTable>
         <createIndex indexName="complete_url_index" tableName="shortened_url">
             <column name="complete_url"/>

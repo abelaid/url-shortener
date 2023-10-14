@@ -51,7 +51,7 @@ class ShortenerServiceIntTest {
 
     @Test
     void shouldGetCompleteUrl() throws Exception {
-        shortenedUrlRepository.save(new ShortenedUrlEntity("fakeTOKEN", "http://junit"));
+        shortenedUrlRepository.save(ShortenedUrlEntity.builder().token("fakeTOKEN").completeUrl("http://junit").build());
 
         String completeUrl = tested.getCompleteUrl("fakeTOKEN");
 

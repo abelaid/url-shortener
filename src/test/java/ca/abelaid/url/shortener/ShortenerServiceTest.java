@@ -51,7 +51,7 @@ class ShortenerServiceTest {
 
     @Test
     void shouldGetCompleteUrl() throws Exception {
-        ShortenedUrlEntity shortenedUrlEntity = new ShortenedUrlEntity("token", "http://original.junit");
+        ShortenedUrlEntity shortenedUrlEntity = ShortenedUrlEntity.builder().token("token").completeUrl("http://original.junit").build();
         when(mockShortenedUrlRepository.findById("token")).thenReturn(Optional.of(shortenedUrlEntity));
 
         String completeUrl = tested.getCompleteUrl("token");
@@ -73,7 +73,7 @@ class ShortenerServiceTest {
 
     @Test
     void shouldNotShortenAlreadyShortenedUrl() throws Exception {
-        ShortenedUrlEntity shortenedUrlEntity = new ShortenedUrlEntity("token", "http://original.junit");
+        ShortenedUrlEntity shortenedUrlEntity = ShortenedUrlEntity.builder().token("token").completeUrl("http://original.junit").build();
         when(mockShortenedUrlRepository.findByCompleteUrl("http://original.junit")).thenReturn(Optional.of(shortenedUrlEntity));
 
         String token = tested.shorten(URI.create("http://original.junit").toURL());
