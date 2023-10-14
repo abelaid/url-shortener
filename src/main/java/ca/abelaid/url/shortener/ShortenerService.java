@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -35,6 +37,16 @@ class ShortenerService {
     String getCompleteUrl(@NotEmpty String token) throws ShortenedUrlNotFoundException {
         return shortenedUrlRepository.findById(token)
                 .orElseThrow(() -> new ShortenedUrlNotFoundException(token)).getCompleteUrl();
+    }
+
+    @Transactional(readOnly = true)
+    Page<ShortenedUrlDto> getAll(@NotNull Pageable pageable, String baseUrl) {
+        return shortenedUrlRepository.findAll(pageable)
+                .map(entity -> ShortenedUrlMapper.map(entity, baseUrl));
+    }
+
+    void deleteByToken(@NotEmpty String shortened) {
+        shortenedUrlRepository.deleteById(shortened);
     }
 
     // private  methods

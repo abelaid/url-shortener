@@ -1,5 +1,6 @@
-package ca.abelaid.url.shortener;
+package ca.abelaid.url.shortener.rest;
 
+import ca.abelaid.url.shortener.ShortenedUrlNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
