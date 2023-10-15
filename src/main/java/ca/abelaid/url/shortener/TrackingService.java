@@ -2,7 +2,6 @@ package ca.abelaid.url.shortener;
 
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
-import io.micrometer.core.instrument.composite.CompositeMeterRegistry;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.URL;
@@ -18,7 +17,6 @@ import org.springframework.validation.annotation.Validated;
 class TrackingService {
 
     private final ShortenedUrlRepository shortenedUrlRepository;
-
     private final MeterRegistry meterRegistry;
 
     @Async
